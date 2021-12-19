@@ -3,7 +3,7 @@ libs/
 # ignore all file in plugins
 plugins/
 # ignore all file in builds
-builds/
+build/
 # ignore all file in dist except custom.css
 dist/
 !dist/css/custom.css
