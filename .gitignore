@@ -1,18 +1,9 @@
-# Build and Release Folders
-bin-debug/
-bin-release/
-[Oo]bj/
-[Bb]in/
-
-# Other files and folders
-.settings/
-
-# Executables
-*.swf
-*.air
-*.ipa
-*.apk
-
-# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
-# should NOT be excluded as they contain compiler settings and other important
-# information for Eclipse / Flash Builder.
+# ignore all file in libs
+libs/
+# ignore all file in plugins
+plugins/
+# ignore all file in builds
+builds/
+# ignore all file in dist except custom.css
+dist/
+!dist/css/custom.css
