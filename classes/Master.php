@@ -365,6 +365,34 @@ Class Master extends DBConnection {
 		}
 		return json_encode($resp);
 	}
+	function return_item(){
+		extract($_POST);
+		$now = new DateTime();
+		$change =  $this->conn->query("UPDATE `borrow_his` set `status` = '3',`return_date` = '{$now->format('Y-m-d H:i:s')}' where id = '{$id}'");
+		if($this->capture_err())
+			return $this->capture_err();
+		if($change){
+			$resp['status'] = 'success';
+		}else{
+			$resp['status'] = 'failed';
+			$resp['err'] = $this->conn->error."[{$sql}]";
+		}
+		return json_encode($resp);
+	}
+	function mask_return(){
+		extract($_POST);
+		$now = new DateTime('now');
+		$chan =  $this->conn->query("UPDATE `borrow_his` set `status` = '2',`return_date` = '{$now->format('Y-m-d H:i:s')}' where id = '{$id}'");
+		if($this->capture_err())
+			return $this->capture_err();
+		if($chan){
+			$resp['status'] = 'success';
+		}else{
+			$resp['status'] = 'failed';
+			$resp['err'] = $this->conn->error."[{$sql}]";
+		}
+		return json_encode($resp);
+	}
 	function delete_cart(){
 		extract($_POST);
 		$delete = $this->conn->query("DELETE FROM `cart` where id = '{$id}'");
@@ -411,13 +439,18 @@ Class Master extends DBConnection {
 		if($save_order){
 			$order_id = $this->conn->insert_id;
 			$data = '';
+			$data_b = '';
 			$cart = $this->conn->query("SELECT c.*,p.title,i.price,p.id as pid from `cart` c inner join `inventory` i on i.id=c.inventory_id inner join products p on p.id = i.product_id where c.client_id ='{$client_id}' ");
 			while($row= $cart->fetch_assoc()):
 				if(!empty($data)) $data .= ", ";
+				if(!empty($data_b)) $data_b .= ", ";
 				$total = $row['price'] * $row['quantity'];
 				$data .= "('{$order_id}','{$row['pid']}','{$row['quantity']}','{$row['price']}', $total)";
+				$data_b .= "('{$client_id}','{$row['pid']}','1')";
 			endwhile;
 			$list_sql = "INSERT INTO `order_list` (order_id,product_id,quantity,price,total) VALUES {$data} ";
+			$list_sql_b = "INSERT INTO `borrow_his` (client_id,product_id,status) VALUES {$data_b} ";
+			$save_b = $this->conn->query($list_sql_b);
 			$save_olist = $this->conn->query($list_sql);
 			if($this->capture_err())
 				return $this->capture_err();
@@ -569,6 +602,12 @@ switch ($action) {
 	break;
 	case 'delete_order':
 		echo $Master->delete_order();
+	break;
+	case 'return_item' :
+		echo $Master->return_item();
+	break;
+	case 'mask_return' :
+		echo $Master->mask_return();
 	break;
 	default:
 		// echo $sysset->index();

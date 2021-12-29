@@ -2,8 +2,9 @@
  <header class="bg-dark py-5" id="main-header">
     <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
-            <h1 class="display-4 fw-bolder">If you want to make intelligent, get books from here.</h1>
-            <p class="lead fw-normal text-white-50 mb-0">Shop Now!</p>
+            <h1 class="display-4 fw-bolder">Welcome to</h1>
+            <h1 class="display-4 fw-bolder">our library</h1>
+            <p class="lead fw-normal text-white-50 mb-0">Let discorver book now !</p>
         </div>
     </div>
 </header>
@@ -18,7 +19,7 @@
     <div class="container px-4 px-lg-5 mt-5">
         <div class="row gx-4 gx-lg-5 row-cols-md-3 row-cols-xl-4 justify-content-center">
             <?php 
-                $products = $conn->query("SELECT * FROM `products` where status = 1 order by rand() limit 8 ");
+                $products = $conn->query("SELECT * FROM `products` where status = 1 order by rand() limit 16 ");
                 while($row = $products->fetch_assoc()):
                     $upload_path = base_app.'/uploads/product_'.$row['id'];
                     $img = "";

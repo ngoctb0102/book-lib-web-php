@@ -6,6 +6,7 @@
                 <div class="w-100 justify-content-between d-flex">
                     <h4><b>Orders</b></h4>
                     <a href="./?p=edit_account" class="btn btn btn-dark btn-flat"><div class="fa fa-user-cog"></div> Manage Account</a>
+                    <a href="./?p=borrow_his" class="btn btn btn-dark btn-flat"><div class="fa fa-user-cog"></div> Borrow history</a>
                 </div>
                     <hr class="border-warning">
                     <table class="table table-stripped text-dark">

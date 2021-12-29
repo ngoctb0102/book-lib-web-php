@@ -56,10 +56,18 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
+                      <a href="<?php echo base_url ?>admin/?page=borrows" class="nav-link nav-borrows">
+                        <i class="nav-icon fas fa-list"></i>
+                        <p>
+                          Borrow List
+                        </p>
+                      </a>
+                    </li>
+                    <li class="nav-item dropdown">
                       <a href="<?php echo base_url ?>admin/?page=sales" class="nav-link nav-sales">
                         <i class="nav-icon fas fa-file"></i>
                         <p>
-                          Sales Report
+                          Report
                         </p>
                       </a>
                     </li>
